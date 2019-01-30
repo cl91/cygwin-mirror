@@ -14,14 +14,18 @@
 
 mirror="http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin"
 root=./cygwin-mirror
+root_dir="$PWD"
 # x64 doesn't really work. So x86 for now.
 arch=x86
 
-root_dir="$PWD"
+setup_w98="2.575"
+circa_w98="2009/12/01/192034"
+setup_nt4="2.762"
+circa_nt4="2012/02/04/034515"
+setup_2k="2.774"
+circa_2k="2013/06/04/121035"
 setup_xp_x86="x86-2.874"
 circa_xp_x86="2016/08/30/104223"
-setup_2k=2.774
-circa_2k="2013/06/04/121035"
 setup_xp_x64="x86_64-2.874"
 circa_xp_x64="2016/08/30/104235"
 
@@ -77,7 +81,7 @@ get_pkgs() {
 	((count=count+1))
 	# using this was "ls" make it slow, but it works
 	#[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; rm -f "../$fname"; }
-	[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; echo "$fname" >> incorrect_fname; }
+	[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; echo "$fname" >> incorrect_size; }
     done
     exec 5<&-
     rm -f file.tmp
@@ -86,6 +90,10 @@ get_pkgs() {
 }
 
 mkdir -p $root
+get_setup $setup_w98 $circa_w98
+get_pkgs $circa_w98
+get_setup $setup_nt4 $circa_nt4
+get_pkgs $circa_nt4
 get_setup $setup_2k $circa_2k
 get_pkgs $circa_2k
 # 32-bit version of setup
