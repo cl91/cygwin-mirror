@@ -1,4 +1,4 @@
-# cygwinxp
+# cygwin-mirror
 Replicate last Cygwin repository compatible with older Windows versions
 
 Created based on information and support of the FruitBat.org TimeMachine: http://www.fruitbat.org/Cygwin/timemachine.html
