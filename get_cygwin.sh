@@ -17,6 +17,7 @@ root=./cygwin-mirror
 # x64 doesn't really work. So x86 for now.
 arch=x86
 
+root_dir="$PWD"
 setup_xp_x86="x86-2.874"
 circa_xp_x86="2016/08/30/104223"
 setup_2k=2.774
@@ -80,6 +81,8 @@ get_pkgs() {
     done
     exec 5<&-
     rm -f file.tmp
+
+    cd "$root_dir"
 }
 
 mkdir -p $root
