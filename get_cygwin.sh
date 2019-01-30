@@ -16,12 +16,13 @@ mirror="http://ctm.crouchingtigerhiddenfruitbat.org/pub/cygwin"
 root=./cygwin-mirror
 # x64 doesn't really work. So x86 for now.
 arch=x86
-#circa_xp_x64="2016/08/30/104235"
 
-setup_xp=2.874
+setup_xp_x86="x86-2.874"
 circa_xp_x86="2016/08/30/104223"
 setup_2k=2.774
 circa_2k="2013/06/04/121035"
+setup_xp_x64="x86_64-2.874"
+circa_xp_x64="2016/08/30/104235"
 
 get_dir() {
     circa=$1
@@ -41,7 +42,7 @@ get_setup() {
     circa=$2
     dir=$(get_dir $circa)
     mkdir -p $dir
-    [[ -s setup-$arch-$ver.exe ]] || wget $mirror/setup/snapshots/setup-x86-2.874.exe -P $dir
+    [[ -s setup-$ver.exe ]] || wget $mirror/setup/snapshots/setup-${ver}.exe -P $dir
     ( cd $dir && [[ -s setup.ini ]] \
 	  || { wget $mirror/circa/${circa}/$arch/setup.bz2 \
 		   && bunzip2 setup.bz2 && mv setup setup.ini; } )
@@ -82,10 +83,10 @@ get_pkgs() {
 
 mkdir -p $root
 get_setup $setup_2k $circa_2k
-#get_pkgs $circa_2k
+get_pkgs $circa_2k
 # 32-bit version of setup
-get_setup $setup_xp $circa_xp_x86
+get_setup $setup_xp_x86 $circa_xp_x86
 # 64-bit version of setup
-#get_setup x86_64 2.874 $circa_xp_x64
+#get_setup x86_64 $setup_xp_x64 $circa_xp_x64
 # 32-bit packages
 get_pkgs $circa_xp_x86
