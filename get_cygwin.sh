@@ -17,10 +17,12 @@ root=./cygwin-mirror
 # x64 doesn't really work. So x86 for now.
 arch=x86
 
+setup_nt4="2.762"
+circa_nt4="2012/02/04/034515"
+setup_2k="2.774"
+circa_2k="2013/06/04/121035"
 setup_xp_x86="x86-2.874"
 circa_xp_x86="2016/08/30/104223"
-setup_2k=2.774
-circa_2k="2013/06/04/121035"
 setup_xp_x64="x86_64-2.874"
 circa_xp_x64="2016/08/30/104235"
 
@@ -83,11 +85,13 @@ get_pkgs() {
 }
 
 mkdir -p $root
-get_setup $setup_2k $circa_2k
-get_pkgs $circa_2k
+get_setup $setup_nt4 $circa_nt4
+get_pkgs $circa_nt4
+#get_setup $setup_2k $circa_2k
+#get_pkgs $circa_2k
 # 32-bit version of setup
-get_setup $setup_xp_x86 $circa_xp_x86
+#get_setup $setup_xp_x86 $circa_xp_x86
 # 64-bit version of setup
 #get_setup x86_64 $setup_xp_x64 $circa_xp_x64
 # 32-bit packages
-get_pkgs $circa_xp_x86
+#get_pkgs $circa_xp_x86
