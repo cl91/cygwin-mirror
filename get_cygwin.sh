@@ -75,7 +75,8 @@ get_pkgs() {
     while read fname src <&5; do
 	((count=count+1))
 	# using this was "ls" make it slow, but it works
-	[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; rm -f "../$fname"; }
+	#[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; rm -f "../$fname"; }
+	[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; echo "$fname" >> incorrect_fname; }
     done
     exec 5<&-
     rm -f file.tmp
