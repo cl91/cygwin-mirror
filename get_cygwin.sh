@@ -17,6 +17,8 @@ root=./cygwin-mirror
 # x64 doesn't really work. So x86 for now.
 arch=x86
 
+setup_w98="2.575"
+circa_w98="2009/12/01/192034"
 setup_nt4="2.762"
 circa_nt4="2012/02/04/034515"
 setup_2k="2.774"
@@ -78,20 +80,22 @@ get_pkgs() {
 	((count=count+1))
 	# using this was "ls" make it slow, but it works
 	#[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; rm -f "../$fname"; }
-	[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; echo "$fname" >> incorrect_fname; }
+	[[ $(ls -l ../$fname | awk '{print $5}') -eq $src ]] || { echo "$count: $fname $src"; echo "$fname" >> incorrect_size; }
     done
     exec 5<&-
     rm -f file.tmp
 }
 
 mkdir -p $root
+get_setup $setup_w98 $circa_w98
+get_pkgs $circa_w98
 get_setup $setup_nt4 $circa_nt4
 get_pkgs $circa_nt4
-#get_setup $setup_2k $circa_2k
-#get_pkgs $circa_2k
+get_setup $setup_2k $circa_2k
+get_pkgs $circa_2k
 # 32-bit version of setup
-#get_setup $setup_xp_x86 $circa_xp_x86
+get_setup $setup_xp_x86 $circa_xp_x86
 # 64-bit version of setup
 #get_setup x86_64 $setup_xp_x64 $circa_xp_x64
 # 32-bit packages
-#get_pkgs $circa_xp_x86
+get_pkgs $circa_xp_x86
